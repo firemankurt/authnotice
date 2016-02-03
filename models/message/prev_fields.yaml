@@ -1,0 +1,52 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+#    id:
+#        label: ID
+#        disabled: true
+    mess_id:
+        label: Mess_id
+        span: auto
+        type: text
+        disabled: true
+    plugin:
+        label: Plugin
+        span: auto
+        type: text
+    level:
+        label: level
+        type: radio
+        options: 
+            info: Info
+            warning: Warning
+            danger: Critical
+    text:
+        label: Text
+        span: full
+        type: textarea
+    author:
+        label: Author
+        span: full
+        type: partial
+        path: $/kurtjensen/authnotice/models/message/_author_field.htm
+    read:
+        label: Read
+        span: auto
+        type: checkbox
+#    send:
+#        label: Send
+#        span: auto
+#        type: checkbox
+#        disabled: true
+    sent_at:
+        label: Sent_at
+        span: auto
+        type: text
+        disabled: true
+    source:
+        label: Source
+        span: auto
+        type: text
+        disabled: true

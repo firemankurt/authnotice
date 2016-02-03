@@ -1,0 +1,2 @@
+    <input type="text" name="author" id="Form-field-Message-author" value="<?= $value?$value : $this->user->first_name.' '.$this->user->last_name  ?>" placeholder="" class="form-control" autocomplete="off" maxlength="255" disabled="disabled" />
+    <input type="hidden" name="Message[author]" id="Form-field-Message-author" value="<?= $value?$value : $this->user->first_name.' '.$this->user->last_name  ?>" />

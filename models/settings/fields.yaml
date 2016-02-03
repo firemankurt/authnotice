@@ -1,0 +1,23 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    auth_section:
+        label: Author Settings
+        type: section
+        comment: This section contains settings for the creator of plugins and their of notices.
+    plugins:
+        label: Plugin Name Spaces
+        placeholder: AwsomeDevel.MyPlugin,AwsomeDevel.MyOtherPlug
+        comment: The plugin namespaces (dot notation) for your plugins. Seperate multiple plugin namespaces with commas.
+    user_section:
+        label: End User Settings
+        type: section
+        comment: This section contains settings for the reciever of notices.
+
+    retention:
+        label: Message Retention
+        default: 30
+        type: number
+        comment: "How many days do you want to retaing messages that are marked as read?  (These will not be deleted on purge.) \nA value of 0 will delete all messages that are marked as read on purge."

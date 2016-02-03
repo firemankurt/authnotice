@@ -1,0 +1,27 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+#        searchable: true
+#    mess_id:
+#        label: Message id
+    plugin:
+        label: Plugin
+#    author:
+#        label: Author
+    level:
+        type: partial
+        label: Level
+    text:
+        label: Text
+#    send:
+#        label: Send
+#    read:
+#        label: Read
+    sent_at:
+        label: Sent
+#    source:
+#        label: Source

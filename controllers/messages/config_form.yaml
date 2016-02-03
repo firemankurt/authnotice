@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Message
+
+# Model Form Field configuration
+form: $/kurtjensen/authnotice/models/message/fields.yaml
+
+# Model Class name
+modelClass: KurtJensen\AuthNotice\Models\Message
+
+# Default redirect location
+defaultRedirect: kurtjensen/authnotice/messages
+
+# Create page
+create:
+    title: Create Message
+    redirect: kurtjensen/authnotice/messages/update/:id
+    redirectClose: kurtjensen/authnotice/messages
+
+# Update page
+update:
+    title: Edit Message
+    redirect: kurtjensen/authnotice/messages
+    redirectClose: kurtjensen/authnotice/messages
+
+# Preview page
+preview:
+    title: Preview Message

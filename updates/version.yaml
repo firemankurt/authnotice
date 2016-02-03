@@ -1,0 +1,4 @@
+1.0.1:
+    - Initialize plugin
+    - create_messages_table.php
+    - create_message_maxes_table.php

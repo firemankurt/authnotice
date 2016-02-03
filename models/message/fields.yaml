@@ -1,0 +1,54 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        span: left
+        disabled: true
+#    mess_id:
+#        label: Mess_id
+#        span: auto
+#        type: text
+#        disabled: true
+    plugin:
+        label: Plugin
+        span: right
+        type: dropdown
+        emptyOption: There are no plugin namespaces in settings, you should enter those first!
+    level:
+        label: level
+        span: left
+        type: radio
+        options: 
+            info: Info
+            warning: Warning
+            danger: Critical
+    author:
+        label: Author
+        span: right
+        type: partial
+        path: $/kurtjensen/authnotice/models/message/_author_field.htm
+    text:
+        label: Text
+        span: full
+        type: textarea
+    read:
+        label: Read
+        span: auto
+        type: checkbox
+    send:
+        label: Release for Sending
+        span: left
+        type: checkbox
+    sent_at:
+        label: Sent_at
+        span: right
+        type: text
+        disabled: true
+#    source:
+#        label: Source
+#        span: auto
+#        type: text
+#        disabled: true

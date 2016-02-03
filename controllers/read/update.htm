@@ -1,0 +1,82 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('kurtjensen/attendance/event') ?>">Event</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+<?php
+$model = $this->formGetModel();
+
+$classes = [
+$model->level=>'',
+    'info' => 'bg-info',
+    'warning' => 'bg-warning',
+    'danger' => 'bg-danger',
+    ];
+$text = [
+$model->level=>'',
+    'info' => 'Info',
+    'warning' => 'Warning',
+    'danger' => 'Critical',
+    ];
+$backgroundClass = $classes[$model->level];
+?>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 <?= $backgroundClass ?>">
+            <p>&nbsp;</p>
+            <h4><i class="icon-info"></i>&nbsp;&nbsp;&nbsp;<?= $model->plugin ?> - <?= $model->level ?></h4>
+            <?= $model->sent_at ?>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 padded">
+            <p>&nbsp;</p>
+            <?= $model->text ?>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 <?= $backgroundClass ?>">
+            <strong>#<?= $model->mess_id ?></strong> 
+            <small>Author : <?= $model->author ?><br />
+                Source : </strong><?= $model->source?$model->source:'LOCAL' ?>
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <p>&nbsp;</p>
+            <p>
+                <?= Form::open() ?>
+                <?= $this->formRender() ?>
+                <div class="loading-indicator-container">
+                <button 
+                    type="submit"
+                    data-request="onSave"
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+r, cmd+r"
+                    data-load-indicator="Marking Read..."
+                    class="btn btn-primary">
+                    Mark as <u>R</u>ead and Return to messages list
+                </button>
+                <a href="<?= Backend::url('kurtjensen/authnotice/read') ?>" class="btn btn-default">Return to messages list</a>
+                </div>
+                <?= Form::close() ?>
+            </p>
+        </div>
+    </div>
+</div>
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('kurtjensen/attendance/event') ?>" class="btn btn-default">Return to event list</a></p>
+
+<?php endif ?>

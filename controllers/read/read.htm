@@ -1,0 +1,80 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('kurtjensen/authnotice/read') ?>">Read</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+
+<?php if (!$this->fatalError): ?>
+<?php
+$classes = [
+$this->vars['message']->level=>'',
+    'info' => 'bg-info',
+    'warning' => 'bg-warning',
+    'danger' => 'bg-danger',
+    ];
+$text = [
+$this->vars['message']->level=>'',
+    'info' => 'Info',
+    'warning' => 'Warning',
+    'danger' => 'Critical',
+    ];
+$backgroundClass = $classes[$this->vars['message']->level];
+?>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 <?= $backgroundClass ?>">
+            <p>&nbsp;</p>
+            <h4><i class="icon-info"></i>&nbsp;&nbsp;&nbsp;<?= $this->vars['message']->plugin ?> - <?= $this->vars['message']->level ?></h4>
+            <?= $this->vars['message']->sent_at ?>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 padded">
+            <p>&nbsp;</p>
+            <?= $this->vars['message']->text ?>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 <?= $backgroundClass ?>">
+            <strong>#<?= $this->vars['message']->mess_id ?></strong> 
+            <small>Author : <?= $this->vars['message']->author ?><br />
+                Source : </strong><?= $this->vars['message']->source?$this->vars['message']->source:'LOCAL' ?>
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <p>&nbsp;</p>
+            <p>
+                <?= Form::open() ?>
+                <button 
+                    type="submit"
+                    data-request-data="close:1"
+                    data-request="onMarkRead"
+                    data-request-data="id:<?= $this->vars['message']->id?>"
+                    data-hotkey="ctrl+r, cmd+r"
+                    data-load-indicator="Marking Read..."
+                    class="btn btn-primary">
+                    Mark as <u>R</u>ead and Return to messages list
+                </button>
+                <?= Form::close() ?>
+                <a href="<?= Backend::url('kurtjensen/authnotice/read') ?>" class="btn btn-default">Return to messages list</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p><a href="<?= Backend::url('kurtjensen/authnotice/read') ?>" class="btn btn-default">Return to read list</a></p>
+
+<?php endif ?>

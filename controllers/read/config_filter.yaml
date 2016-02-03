@@ -1,0 +1,10 @@
+# ===================================
+# Filter Scope Definitions
+# ===================================
+
+scopes:
+    show_read:
+        label: Hide Read
+        type: checkbox
+        scope: unread
+        default: true
