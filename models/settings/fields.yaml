@@ -9,9 +9,17 @@ fields:
         comment: This section contains settings for the creator of plugins and their of notices.
     plugins:
         label: Plugin Name Spaces
+        span: auto
+        type: textarea
         placeholder: AwsomeDevel.MyPlugin,AwsomeDevel.MyOtherPlug
         comment: The plugin namespaces (dot notation) for your plugins. Seperate multiple plugin namespaces with commas.
-    user_section:
+    auth_lang:
+        label: Author Language
+        placeholder: en
+        default: en
+        span: auto
+        comment: Language that your notes will be sent as.
+    puser_section:
         label: End User Settings
         type: section
         comment: This section contains settings for the reciever of notices.
@@ -20,4 +28,16 @@ fields:
         label: Message Retention
         default: 30
         type: number
+        span: auto
         comment: "How many days do you want to retaing messages that are marked as read?  (These will not be deleted on purge.) \nA value of 0 will delete all messages that are marked as read on purge."
+    auto_purge:
+        label: Auto Purge
+        type: checkbox
+        span: auto
+        comment: Purge read messages that are past retention date automatically.
+    read_lang:
+        label: Reader Language
+        placeholder: es
+        default: en
+        span: auto
+        comment: Language that you prefer notes be translated to.

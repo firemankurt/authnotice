@@ -71,7 +71,7 @@ class Plugin extends PluginBase
         return [
             'authnotice' => [
                 'label' => 'Author Notices',
-                'url' => Backend::url('kurtjensen/authnotice/messages'),
+                'url' => Backend::url('kurtjensen/authnotice/start'),
                 'icon' => 'icon-comment',
                 'permissions' => ['kurtjensen.authnotice.*'],
                 'order' => 500,

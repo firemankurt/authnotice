@@ -67,6 +67,10 @@ $backgroundClass = $classes[$this->vars['message']->level];
                 </button>
                 <?= Form::close() ?>
                 <a href="<?= Backend::url('kurtjensen/authnotice/read') ?>" class="btn btn-default">Return to messages list</a>
+
+                <a >
+                    Translate on Google
+                </a>
             </p>
         </div>
     </div>
@@ -75,6 +79,6 @@ $backgroundClass = $classes[$this->vars['message']->level];
 <?php else: ?>
 
     <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('kurtjensen/authnotice/read') ?>" class="btn btn-default">Return to read list</a></p>
+    <p><a href="<?= Backend::url('kurtjensen/authnotice/read') ?>" class="btn btn-default">Return to message list</a></p>
 
 <?php endif ?>

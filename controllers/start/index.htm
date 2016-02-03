@@ -1,0 +1,31 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('kurtjensen/authnotice/start') ?>">Author Notices</a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+<div>
+	<h2>
+        <i class="icon-comment text-success"></i>
+        October Author Notices</h2>
+	<p>Create, read and adjust notice setting.</p>
+</div>
+<?php
+    $sideMenuItems = BackendMenu::listSideMenuItems();
+?>
+<?php if ($sideMenuItems): ?>
+<div class="container">
+    <div class="row">
+<?php foreach ($sideMenuItems as $sideItemCode => $item): ?>
+        <div class="col-md-3 text-center" <?= HTML::attributes($item->attributes) ?>>
+        	<h2 >
+            <a href="<?= $item->url ?>">
+                <i class="<?= $item->icon ?>"></i><br /><?= e(trans($item->label)) ?>
+            </a>
+            </h2>
+            <p><?= $item->attributes['title'] ?></p>
+        </div>
+<?php endforeach ?>
+    </div>
+</div>
+<?php endif ?>

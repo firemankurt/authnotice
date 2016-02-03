@@ -1,0 +1,34 @@
+<div class="container" style="background-color:#fff;">
+    <div class="row">
+        <div class="report-widget col-md-5">
+            <h3><?= e(trans('kurtjensen.mailgun::lang.widgets.title')) ?> <?= $this->daysToShow ?> <?= e(trans('kurtjensen.mailgun::lang.widgets.title_days')) ?></h3>
+            <div
+                class="control-chart"
+                data-control="chart-pie"
+                data-size="<?= $this->chart['size'] ?>"
+                data-center-text="<?= e(trans('kurtjensen.mailgun::lang.widgets.total')) ?> <?= $this->chart['delivered'] + $this->chart['failed'] ?>">
+                <ul>
+                    <li><?= e(trans('kurtjensen.mailgun::lang.widgets.delivered')) ?> <?= $this->chart['deliveredPercent'] ?>% <span><?= $this->chart['delivered'] ?></span></li>
+                    <li><?= e(trans('kurtjensen.mailgun::lang.widgets.failed')) ?> <?= $this->chart['failedPercent'] ?>% <span><?= $this->chart['failed'] ?></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="report-widget col-md-7">
+            <h3><?= e(trans('kurtjensen.mailgun::lang.widgets.title')) ?> <?= $this->daysToShow ?> <?= e(trans('kurtjensen.mailgun::lang.widgets.title_days')) ?></h3>
+
+            <div
+                    class="control-chart wrap-legend"
+                    data-control="chart-bar"
+                    data-height="<?= $this->chart['size'] ?>"
+                    data-full-width="0">
+                <ul>
+                    <li><?= e(trans('kurtjensen.mailgun::lang.widgets.delivered')) ?> <?= $this->chart['deliveredPercent'] ?>% <span><?= $this->chart['delivered'] ?></span></li>
+                    <li><?= e(trans('kurtjensen.mailgun::lang.widgets.opened')) ?> <?= $this->chart['openedPercent'] ?>% <span><?= $this->chart['opened'] ?></span></li>
+                    <li><?= e(trans('kurtjensen.mailgun::lang.widgets.clicked')) ?> <?= $this->chart['clickedPercent'] ?>% <span><?= $this->chart['clicked'] ?></span></li>
+                    <li><?= e(trans('kurtjensen.mailgun::lang.widgets.complained')) ?> <?= $this->chart['complainedPercent'] ?>% <span><?= $this->chart['complained'] ?></span></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

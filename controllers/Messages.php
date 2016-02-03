@@ -2,7 +2,6 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use DB;
 use Flash;
 use KurtJensen\AuthNotice\Models\Message;
 use KurtJensen\AuthNotice\Models\MessageMax;
@@ -14,6 +13,8 @@ use System\Classes\PluginManager;
  */
 class Messages extends Controller
 {
+    public $requiredPermissions = ['kurtjensen.authnotice.create'];
+
     public $plugin = null;
     public $url = '';
 
@@ -25,59 +26,11 @@ class Messages extends Controller
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
 
-    public $requiredPermissions = ['kurtjensen.authnotice.*'];
-
     public function __construct()
     {
         parent::__construct();
 
         BackendMenu::setContext('KurtJensen.AuthNotice', 'authnotice', 'messages');
-/*
-$notDelete = DB::table('kurtjensen_authnotice_messages')
-->select('plugin', DB::raw('max(mess_id) as max_id'))
-->groupBy('plugin')
-->get();
-
-$query = DB::table('kurtjensen_authnotice_messages')
-->whereRead(true)
-$query->whereNotIn('id', function ($query) use ($row) {
-DB::table('kurtjensen_authnotice_messages')
-->select('id')
-->where('plugin', $row->plugin)
-->where('mess_id', $row->max_id);
-
-$this->vars['m'] = $query->get();
-
- */
-
-//[plugin] => KurtJensen.Mailgun [max_id] => 78
-    }
-
-    public function index()
-    {
-
-        parent::index();
-
-        $protectRows = MessageMax::lists('row_id');
-
-        $this->vars['m'] = Message::whereNotIn('id', $protectRows)
-             ->where('read', 1)->lists('id');
-/**
-$this->vars['m'] = Message::select('plugin', DB::raw("id, max(mess_id) as m"))
-->groupBy('plugin')
-->get()->toArray();
- **/
-/*
-$this->vars['m'] = Db::table('kurtjensen_authnotice_messages');
-
-->where('name', '=', 'John')
-->orWhere(function ($query) {
-$query->where('votes', '>', 100)
-->where('title', '<>', 'Admin');
-})
-->get();
-
- */
     }
 
     public function listExtendQuery($query)
@@ -159,13 +112,6 @@ $query->where('votes', '>', 100)
 
     public function doRequests($serviceUrls)
     {
-        /*
-        $maxMessages = DB::table('kurtjensen_authnotice_messages')
-        ->whereIn('plugin', array_keys($serviceUrls))
-        ->select('plugin', DB::raw('max(mess_id) as max_id'))
-        ->groupBy('plugin')
-        ->get();
-         */
         $maxMessIds = MessageMax::lists('max_id', 'plugin');
 
         foreach ($serviceUrls as $plugin => $url) {
@@ -215,14 +161,16 @@ $query->where('votes', '>', 100)
             [
                 'mess_id' => $id,
                 'plugin' => $this->plugin,
-                                 //'author' => ,
-                                 //'level' => ,
-                                 //'text' => ,
-                                 //'send' => ,
+/**
+ *               'author' => ,
+ *               'level' => ,
+ *               'text' => ,
+ *               'send' => ,
+ **/
                 'read' => false,
-                //'sent_at' => ,
+/**             'sent_at' => , **/
                 'source' => $this->url,
-                                 //'created_at' => ,
+//**            'created_at' => ,  **/
                 'updated_at' => null,
             ]);
 

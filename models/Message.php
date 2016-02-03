@@ -71,6 +71,10 @@ class Message extends Model
         if ($this->send && !$this->sent_at) {
             $this->sent_at = Carbon::now();
         };
+        if (!$this->lang) {
+            $this->lang = Settings::get('auth_lang', 'en');
+        }
+
     }
 
     public function markRead()

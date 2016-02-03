@@ -70,6 +70,15 @@ $backgroundClass = $classes[$model->level];
                 <a href="<?= Backend::url('kurtjensen/authnotice/read') ?>" class="btn btn-default">Return to messages list</a>
                 </div>
                 <?= Form::close() ?>
+
+                <a href="https://translate.google.com/#<?= 
+                    $model->lang ?>/<?= 
+                    $this->vars['lang'] ?>/<?= 
+                    urlencode($model->text) ?>"
+                    target="tramslate"
+                    class="btn btn-primary">
+                    Translate on Google
+                </a>
             </p>
         </div>
     </div>

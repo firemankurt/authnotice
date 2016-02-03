@@ -12,6 +12,8 @@ use KurtJensen\AuthNotice\Models\Settings;
  */
 class Read extends Controller
 {
+    public $requiredPermissions = ['kurtjensen.authnotice.read'];
+
     public $implement = [
         'Backend.Behaviors.ListController',
         'Backend.Behaviors.FormController',
@@ -31,12 +33,10 @@ class Read extends Controller
     /**
      * Makes a request to the plugin authors message service
      */
-    public function read($id)
+    public function update($id)
     {
-        if (!$message = Message::find($id)) {
-            return;
-        }
-        $this->vars['message'] = $message;
+        parent::update($id);
+        $this->vars['lang'] = Settings::get('read_lang', 'en');
     }
 
     /**
@@ -59,7 +59,7 @@ class Read extends Controller
             Message::whereIn('id', $checkedIds)
                 ->update(['read' => 1]);
 
-            Flash::success('Successfully deleted those messages.');
+            Flash::success('Successfully marked those messages.');
         }
 
         return $this->listRefresh();
@@ -68,12 +68,12 @@ class Read extends Controller
     public function index_onPurge()
     {
         $retention = Settings::get('retention', 30);
-        $stopDate = date('Y-m-d H:i:s', strtotime('-' . $retention . ' day'));
+        $retentionDate = date('Y-m-d H:i:s', strtotime('-' . $retention . ' day'));
 
         $protectRows = MessageMax::lists('row_id');
 
         Message::whereNotIn('id', $protectRows)
-            ->where('sent_at', '<', $stopDate)
+            ->where('sent_at', '<', $retentionDate)
             ->where('read', 1)->delete();
 
         Flash::success('Successfully deleted read messages.');
