@@ -1,15 +1,22 @@
-<?php namespace KurtJensen\AuthNotice\Traits;
+<?php namespace KurtJensen\AuthNotice\Classes;
 
 use KurtJensen\AuthNotice\Models\Message;
 use KurtJensen\AuthNotice\Models\MessageMax;
+use October\Rain\Network\Http;
+use System\Classes\PluginManager;
 
-trait Retrieve
+class Retrieve
 {
+    public $plugin = null;
+    public $url = '';
 
-    public function onRetrieve()
+    public function __construct()
+    {
+    }
+
+    public function Retrieve()
     {
 
-        // $plugins = System\Models\PluginVersion::get('code');
         $serviceUrls = [];
         $manager = PluginManager::instance();
         $plugins = $manager->getPlugins();
@@ -22,7 +29,7 @@ trait Retrieve
             }
         }
         $this->doRequests($serviceUrls);
-        return ['#response' => 'done'];
+        return null;
     }
 
     /**

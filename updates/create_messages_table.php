@@ -15,7 +15,7 @@ class CreateMessagesTable extends Migration
             $table->string('plugin')->nullable();
             $table->string('author')->nullable();
             $table->string('lang')->nullable();
-            $table->enum('level', array('info', 'warning', 'danger'));
+            $table->enum('level', array('info', 'warning', 'danger', 'question'));
             $table->text('text')->nullable();
             $table->boolean('send')->default(false);
             $table->boolean('read')->default(false);

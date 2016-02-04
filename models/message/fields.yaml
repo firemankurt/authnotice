@@ -25,6 +25,7 @@ fields:
             info: Info
             warning: Warning
             danger: Critical
+            question: Question
     author:
         label: Author
         span: right
@@ -34,10 +35,10 @@ fields:
         label: Text
         span: full
         type: textarea
-    read:
-        label: Read
-        span: auto
-        type: checkbox
+#    read:
+#        label: Read
+#        span: auto
+#        type: checkbox
     send:
         label: Release for Sending
         span: left

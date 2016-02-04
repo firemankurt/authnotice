@@ -3,8 +3,7 @@
 use BackendMenu;
 use Backend\Classes\Controller;
 use Flash;
-use KurtJensen\AuthNotice\Models\Message;
-use KurtJensen\AuthNotice\Models\MessageMax;
+use KurtJensen\AuthNotice\Classes\Retrieve as Retriever;
 use KurtJensen\AuthNotice\Models\Settings;
 
 /**
@@ -12,7 +11,7 @@ use KurtJensen\AuthNotice\Models\Settings;
  */
 class Read extends Controller
 {
-    use \KurtJensen\AuthNotice\Traits\Retrieve;
+    use \KurtJensen\AuthNotice\Traits\Purge;
 
     public $requiredPermissions = ['kurtjensen.authnotice.read'];
 
@@ -46,6 +45,14 @@ class Read extends Controller
         $this->vars['lang'] = Settings::get('read_lang', 'en');
     }
 
+    public function onRetrieve()
+    {
+        $retriever = new Retriever();
+        $retriever->Retrieve();
+        Flash::success('Finished retrieving messages.');
+        return $this->listRefresh();
+    }
+
     /**
      * Makes a request to the plugin authors message service
      */
@@ -74,16 +81,9 @@ class Read extends Controller
 
     public function index_onPurge()
     {
-        $retention = Settings::get('retention', 30);
-        $retentionDate = date('Y-m-d H:i:s', strtotime('-' . $retention . ' day'));
+        $this->Purge();
 
-        $protectRows = MessageMax::lists('row_id');
-
-        Message::whereNotIn('id', $protectRows)
-            ->where('sent_at', '<', $retentionDate)
-            ->where('read', 1)->delete();
-
-        Flash::success('Successfully deleted read messages.');
+        Flash::success('Successfully deleted read messages upto purge date.');
 
         return $this->listRefresh();
     }

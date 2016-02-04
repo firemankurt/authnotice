@@ -12,9 +12,6 @@ class Messages extends Controller
 {
     public $requiredPermissions = ['kurtjensen.authnotice.create'];
 
-    public $plugin = null;
-    public $url = '';
-
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',

@@ -1,6 +1,7 @@
 <?php namespace KurtJensen\AuthNotice;
 
 use Backend;
+use KurtJensen\AuthNotice\Classes\Retrieve as Retriever;
 use System\Classes\PluginBase;
 
 /**
@@ -8,6 +9,7 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
+    use \KurtJensen\AuthNotice\Traits\Purge;
 
     /**
      * Returns information about this plugin.
@@ -18,7 +20,7 @@ class Plugin extends PluginBase
     {
         return [
             'name' => 'Author Notice',
-            'description' => 'Get and Send Notices to Plugin Users',
+            'description' => 'Get Notices from Authors and Send Notices to Plugin Users',
             'author' => 'KurtJensen',
             'icon' => 'icon-comment',
             'message_url' => 'http://tosh/~kurt/october/authserve/',
@@ -119,5 +121,23 @@ class Plugin extends PluginBase
                 'permissions' => ['kurtjensen.authnotice.settings'],
             ],
         ];
+    }
+
+    public function autoRetrieve()
+    {
+        if (Settings::get('auto_retrieve', 0)) {
+            $retriever = new Retriever();
+            $retriever->Retrieve();
+        }
+        if (Settings::get('auto_purge', 0)) {
+            $this->Purge();
+        }
+    }
+
+    public function registerSchedule($schedule)
+    {
+        $schedule->call(function () {
+            $this->autoRetrieve();
+        })->daily();
     }
 }
