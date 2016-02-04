@@ -12,7 +12,7 @@ class Message extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $readScope = 0;
+    public $readReverse = 0;
 
     /**
      * @var string The database table used by the model.
@@ -62,18 +62,18 @@ class Message extends Model
 
     public function scopeDisableunread($query)
     {
-        $this->readScope = 1;
+        $this->readReverse = 1;
         return $query;
     }
 
     public function scopeRead($query)
     {
-        return $query->where('read', $this->readScope);
+        return $query->where('read', 1);
     }
 
     public function scopeUnRead($query)
     {
-        return $query->where('read', $this->readScope);
+        return $query->where('read', $this->readReverse);
     }
 
     public function beforeSave()
