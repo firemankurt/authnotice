@@ -24,7 +24,7 @@ class Messages extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('KurtJensen.AuthNotice', 'authnotice', 'messages');
+        BackendMenu::setContext('KurtJensen.AuthNotice', 'authnotice', 'create');
     }
 
     public function listExtendQuery($query)

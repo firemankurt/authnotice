@@ -1,8 +1,17 @@
-<div class="container" style="background-color:#fff;">
+<?php
+$class = ($this->messageCount < 1)? '':
+		 ($this->messageCount < 2)? 'bg-success':
+		 ($this->messageCount < 4)? 'bg-info':
+		 ($this->messageCount < 6)? 'bg-warning':
+		 ($this->messageCount < 10)? 'bg-success':'bg-danger';
+?>
+<div class="container">
     <div class="row">
         <div class="report-widget col-md-5">
-            <h3><?= e(trans('kurtjensen.authornotice::lang.widgets.title')) ?></h3>
-            
+	            <h3>Author Notices</h3>
+        	<div class="<?= $class ?> text-center">
+	            <h2>You Have <?= $this->messageCount ?><br /><a href="<?= Backend::url('kurtjensen/authnotice/read') ?>">Unread Messages.</a></h2>
+        	</div>
         </div>
     </div>
 </div>

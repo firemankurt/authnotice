@@ -2,17 +2,14 @@
 namespace KurtJensen\AuthNotice\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
+use KurtJensen\AuthNotice\Models\Message;
 
 class Alert extends ReportWidgetBase
 {
+    public $messageCount = 0;
     public function render()
     {
-        $this->chart['size'] = $this->property("size");
-        $this->daysToShow = $this->property("days");
-
-        $stats = StatsModel::where('date', '>', Carbon::now()->subDay($this->daysToShow))->get();
-
-        $this->chart['delivered'] = $stats->sum('delivered_total');
+        $this->messageCount = Message::WhereNotNull('source')->UnRead()->count();
 
         return $this->makePartial('widget');
     }
@@ -22,18 +19,10 @@ class Alert extends ReportWidgetBase
         return [
             'title' => [
                 'title' => 'backend::lang.dashboard.widget_title_label',
-                'default' => 'kurtjensen.authornotice::lang.widgets.name',
+                'default' => 'Author Notices',
                 'type' => 'string',
                 'validationPattern' => '^.+$',
                 'validationMessage' => 'backend::lang.dashboard.widget_title_error',
-            ],
-            'size' => [
-                'title' => 'kurtjensen.authornotice::lang.widgets.size',
-                'type' => 'string',
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'kurtjensen.authornotice::lang.widgets.num_validate',
-                'default' => '200',
-                'description' => 'kurtjensen.authornotice::lang.widgets.size_desc',
             ],
         ];
     }

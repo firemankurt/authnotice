@@ -140,4 +140,14 @@ class Plugin extends PluginBase
             $this->autoRetrieve();
         })->daily();
     }
+
+    public function registerReportWidgets()
+    {
+        return [
+            'KurtJensen\AuthNotice\ReportWidgets\Alert' => [
+                'label' => 'Author Notices',
+                'context' => 'dashboard',
+            ],
+        ];
+    }
 }
