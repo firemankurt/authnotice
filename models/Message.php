@@ -9,6 +9,10 @@ use Model;
  */
 class Message extends Model
 {
+    /**
+     * @var string The database table used by the model.
+     */
+    public $readScope = 0;
 
     /**
      * @var string The database table used by the model.
@@ -56,14 +60,20 @@ class Message extends Model
         return $list;
     }
 
+    public function scopeDisableunread($query)
+    {
+        $this->readScope = 1;
+        return $query;
+    }
+
     public function scopeRead($query)
     {
-        return $query->where('read', 1);
+        return $query->where('read', $this->readScope);
     }
 
     public function scopeUnRead($query)
     {
-        return $query->where('read', 0);
+        return $query->where('read', $this->readScope);
     }
 
     public function beforeSave()

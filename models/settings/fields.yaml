@@ -7,6 +7,7 @@ fields:
         label: Author Settings
         type: section
         comment: This section contains settings for the creator of plugins and their of notices.
+
     plugins:
         label: Plugin Name Spaces
         span: auto
@@ -19,7 +20,8 @@ fields:
         default: en
         span: auto
         comment: Language that your notes will be sent as.
-    puser_section:
+
+    user_section:
         label: End User Settings
         type: section
         comment: This section contains settings for the reciever of notices.
@@ -41,3 +43,9 @@ fields:
         default: en
         span: auto
         comment: Language that you prefer notes be translated to.
+    auto_retrieve:
+        label: Auto Retrieve
+        type: checkbox
+        span: auto
+        comment: Retrieve messages from servers automatically each day. ( Requires proper setup of scheduler in October CMS )
+    

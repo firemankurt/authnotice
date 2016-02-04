@@ -6,6 +6,9 @@ columns:
 #    id:
 #        label: ID
 #        searchable: true
+    read:
+        label: Read
+        type: switch
     sent_at:
         label: Released
     plugin:
@@ -19,8 +22,6 @@ columns:
         label: Text
 #    send:
 #        label: Send
-#    read:
-#        label: Read
 #    source:
 #        label: Source
     mess_id:

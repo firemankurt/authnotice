@@ -12,6 +12,8 @@ use KurtJensen\AuthNotice\Models\Settings;
  */
 class Read extends Controller
 {
+    use \KurtJensen\AuthNotice\Traits\Retrieve;
+
     public $requiredPermissions = ['kurtjensen.authnotice.read'];
 
     public $implement = [
@@ -28,6 +30,11 @@ class Read extends Controller
         parent::__construct();
 
         BackendMenu::setContext('KurtJensen.AuthNotice', 'authnotice', 'read');
+    }
+
+    public function listExtendQuery($query)
+    {
+        return $query->WhereNotNull('source')->UnRead();
     }
 
     /**

@@ -13,23 +13,7 @@ class Alert extends ReportWidgetBase
         $stats = StatsModel::where('date', '>', Carbon::now()->subDay($this->daysToShow))->get();
 
         $this->chart['delivered'] = $stats->sum('delivered_total');
-        $this->chart['failed'] = $stats->sum('perm_fail_total');
 
-        $grandTotal = $this->chart['delivered'] + $this->chart['failed'];
-        $factor = $grandTotal / 100;
-
-        $this->chart['deliveredPercent'] = $grandTotal ? round($this->chart['delivered'] / $factor, 2) : '--';
-
-        $this->chart['failedPercent'] = $grandTotal ? round($this->chart['failed'] / $factor, 2) : '--';
-
-        $this->chart['opened'] = $stats->sum('opened');
-        $this->chart['openedPercent'] = $grandTotal ? round($this->chart['opened'] / $factor, 2) : '--';
-
-        $this->chart['clicked'] = $stats->sum('clicked');
-        $this->chart['clickedPercent'] = $grandTotal ? round($this->chart['clicked'] / $factor, 2) : '--';
-
-        $this->chart['complained'] = $stats->sum('complained');
-        $this->chart['complainedPercent'] = $grandTotal ? round($this->chart['complained'] / $factor, 2) : '--';
         return $this->makePartial('widget');
     }
 
