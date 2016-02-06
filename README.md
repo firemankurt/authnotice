@@ -13,7 +13,7 @@ You will only get messages for plugins you have installed.  Authors should not b
 
 ## Plugin settings
 
-This plugin creates a Settings menu item, found by navigating to **Author Notices** page in the top menu or **Settings > Author Notices**. This page allows the setting of common features, described in more detail below.
+This plugin creates a Settings menu item, found by navigating to **Settings > Author Notices**. This page allows the setting of common features, described in more detail below.
 - For reading only you should set your **End User Settings**
     - Message Retention - Sets how many days you want to retaing messages that are marked as read?  (Newer messages will not be deleted on purge.) A value of 0 will delete all messages that are marked as read on purge. ( default: 30 )
     - Auto Purge - If checked, all read messages that are past retention date automatically purge from the database daily. ( Requires proper setup of scheduler in October CMS )

@@ -1,6 +1,7 @@
 <?php namespace KurtJensen\AuthNotice;
 
 use Backend;
+use BackendAuth;
 use KurtJensen\AuthNotice\Classes\Retrieve as Retriever;
 use System\Classes\PluginBase;
 
@@ -23,7 +24,7 @@ class Plugin extends PluginBase
             'description' => 'Get Notices from Authors and Send Notices to Plugin Users',
             'author' => 'KurtJensen',
             'icon' => 'icon-comment',
-            'message_url' => 'http://tosh/~kurt/october/authserve/',
+            'message_url' => 'http://firemankurt.com/notices/',
         ];
     }
 
@@ -70,39 +71,41 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return [
+
+        $sidemenu = [
+            'read' => [
+                'label' => 'Read',
+                'icon' => 'icon-comment',
+                'url' => Backend::url('kurtjensen/authnotice/read'),
+                'permissions' => ['kurtjensen.authnotice.read'],
+            ],
+            'create' => [
+                'label' => 'Create',
+                'icon' => 'icon-pencil-square-o',
+                'url' => Backend::url('kurtjensen/authnotice/messages'),
+                'permissions' => ['kurtjensen.authnotice.create'],
+            ],
+        ];
+        return BackendAuth::getUser()->hasAccess('kurtjensen.authnotice.read') ?
+        [
             'authnotice' => [
                 'label' => 'Author Notices',
-                'url' => Backend::url('kurtjensen/authnotice/start'),
                 'icon' => 'icon-comment',
-                'permissions' => ['kurtjensen.authnotice.*'],
-                'order' => 500,
+                'url' => Backend::url('kurtjensen/authnotice/read'),
+                'permissions' => ['kurtjensen.authnotice.read'],
+                'sideMenu' => $sidemenu,
 
-                'sideMenu' => [
-                    'read' => [
-                        'label' => 'Read',
-                        'icon' => 'icon-comment',
-                        'attributes' => ['title' => 'Read notices for plugins.'],
-                        'url' => Backend::url('kurtjensen/authnotice/read'),
-                        'permissions' => ['kurtjensen.authnotice.*'],
-                    ],
-                    'create' => [
-                        'label' => 'Create',
-                        'icon' => 'icon-pencil-square-o',
-                        'attributes' => ['title' => 'Create notices for a plugin.'],
-                        'url' => Backend::url('kurtjensen/authnotice/messages'),
-                        'permissions' => ['kurtjensen.authnotice.create'],
-                    ],
-                    'settings' => [
-                        'label' => 'AuthNotice Settings Page',
-                        'icon' => 'icon-gear',
-                        'code' => 'settings',
-                        'owner' => 'KurtJensen.AuthNotice',
-                        'attributes' => ['title' => 'Configure your AuthNotice settings.'],
-                        'url' => Backend::url('system/settings/update/kurtjensen/authnotice/settings'),
-                        'permissions' => ['kurtjensen.authnotice.settings'],
-                    ],
-                ],
+            ],
+        ]
+        :
+
+        [
+            'authnotice' => [
+                'label' => 'Author Notices',
+                'icon' => 'icon-comment',
+                'url' => Backend::url('kurtjensen/authnotice/messages'),
+                'permissions' => ['kurtjensen.authnotice.create'],
+                'sideMenu' => $sidemenu,
 
             ],
         ];
