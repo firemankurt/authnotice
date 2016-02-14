@@ -24,8 +24,12 @@ class Plugin extends PluginBase
             'description' => 'Get Notices from Authors and Send Notices to Plugin Users',
             'author' => 'KurtJensen',
             'icon' => 'icon-comment',
-            'message_url' => 'http://firemankurt.com/notices/',
         ];
+    }
+
+    public function messageURL()
+    {
+        return 'http://firemankurt.com/notices/';
     }
 
     /**

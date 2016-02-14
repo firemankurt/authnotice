@@ -22,10 +22,8 @@ class Retrieve
         $plugins = $manager->getPlugins();
 
         foreach ($plugins as $authPlug => $plugin) {
-            $details = $plugin->pluginDetails();
-
-            if (isset($details['message_url'])) {
-                $serviceUrls[$authPlug] = $details['message_url'];
+            if (method_exists($plugin, 'messageURL')) {
+                $serviceUrls[$authPlug] = $plugin->messageURL();
             }
         }
         $this->doRequests($serviceUrls);
