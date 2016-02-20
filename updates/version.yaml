@@ -3,3 +3,4 @@
     - create_messages_table.php
     - create_message_maxes_table.php
 1.0.2: Added messageURL() to enable Author Notices
+1.0.3: Fixed Missing model in Reda Controller

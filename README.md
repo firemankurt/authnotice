@@ -41,26 +41,20 @@ This plugin creates a Settings menu item, found by navigating to **Settings > Au
 
 ## Your Plugins
 
-- YOUR PLUGINS WILL NEED a "message_url" added in the Plugin.php file if they are going to request messages.
+- YOUR PLUGINS WILL NEED a "messageURL()" function added in the Plugin.php file if they are going to request messages.
 
 ```
     class Plugin extends PluginBase
     {
 
         /**
-         * Returns information about this plugin.
+         * Returns URL of server for this plugin.
          *
          * @return array
          */
-        public function pluginDetails()
+        public function messageURL()
         {
-            return [
-                'name' => 'MyPlugin',
-                'description' => 'Adds great feature to October CMS.',
-                'author' => 'Me',
-                'icon' => 'icon-leaf',
-                'message_url' => 'http://example.com/authserve/',
-            ];
+            return 'http://yourserver.com/notices/';
         }
 ```
 ## Write your message

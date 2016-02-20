@@ -4,6 +4,7 @@ use BackendMenu;
 use Backend\Classes\Controller;
 use Flash;
 use KurtJensen\AuthNotice\Classes\Retrieve as Retriever;
+use KurtJensen\AuthNotice\Models\Message;
 use KurtJensen\AuthNotice\Models\Settings;
 
 /**
