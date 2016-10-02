@@ -3,6 +3,7 @@
 use Backend;
 use BackendAuth;
 use KurtJensen\AuthNotice\Classes\Retrieve as Retriever;
+use KurtJensen\AuthNotice\Models\Settings;
 use System\Classes\PluginBase;
 
 /**
